@@ -5,8 +5,11 @@
  * 	int s = 0
  * 	print("[")
  * 	while(s > MAX):
- * 		print(item)
- * 	print("]\n")
+ * 		if not last item:
+ * 			print(item + space for next)
+ * 		else:
+ * 			print(item)
+ * 	print("]") // newline moved to sort function change
  *
  * function sort (array):			//Provided function algo don't touch
  * 	create integer variables i and j
@@ -15,6 +18,10 @@
  * 			if array[j] > array[j+1]:
  * 				swap array[j] with array[j+1]
  * 				printArray(array)
+ *
+ * addition to sort function: Counter for how many checks have been done since last print
+ * 	(was done without changing the provided amount of arguments in function declaration)
+ *
  *
  * function swap (current value address, next value address):
  * 	create temporary value holder variable
@@ -34,6 +41,7 @@ int main(){ 					//Starter don't touch
   int values[] = {7, 3, 9, 4, 6, 1, 2, 8, 5}; 	//Starter don't touch
   printf("Before: \n"); 			//Starter don't touch
   printValues(values); 				//Starter don't touch
+  printf("\n"); // Makes up for the newline removal in printValues
 
   // test swap 					//Starter don't touch
   int x = 3; 					//Starter don't touch
@@ -54,21 +62,35 @@ void printValues(int array[]){
 	//printf("Const understanding sanity check: %d\n", MAX);
 	printf("[");
 	while(s < MAX){
-		printf("%d ",array[s]);
+		if(s == MAX-1){
+			printf("%d",array[s]);
+		}
+		else{
+			printf("%d ",array[s]);
+		} // end if/else
 		s++;
 	} // end while
-	printf("]\n");
+	printf("]"); // Newline created in sort iteration check.
 } // end printValues
 
 void sort(int array[]){
 	int i = 0;
 	int j = 0;
+	int iterations = 0;
 	for(i = 0; (i < (MAX - 1)); i++){
 		for(j = 0; j < (MAX - 1);j++){
+				iterations++;
 				if(array[j] > array[j+1]){
 					swap(&array[j],&array[j+1]);
 					printValues(array);
-				} // end if
+					if(iterations == 1){
+						printf(" (%d check since last version)\n",iterations);
+					}
+					else{
+						printf(" (%d checks since last version)\n",iterations);
+					} // end iterations if/else
+					iterations = 0;
+				} // end swap if
 		} // end j for
 	} // end i for
 }// end sort
@@ -80,5 +102,5 @@ void swap(int* c, int* n){
 	*c = *n; // value at next becomes value at current 
 	*n = t; // value at next becomes t (The old C)
 	//printf("Post swap values: %d, %d, %d\n", t, *c, *n);
-}
+}// end swap
 	
