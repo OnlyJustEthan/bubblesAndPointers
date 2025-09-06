@@ -42,7 +42,7 @@ int main(){ 					//Starter don't touch
   swap(&x, &y); 				//Starter don't touch
   printf("x: %d, y: %d \n", x, y);		//Starter don't touch
 
-  //sort(values);
+  sort(values);					//Starter don't touch
   printf("After: \n"); 				//Starter don't touch
   printValues(values); 				//Starter don't touch
 
@@ -54,25 +54,31 @@ void printValues(int array[]){
 	//printf("Const understanding sanity check: %d\n", MAX);
 	printf("[");
 	while(s < MAX){
-		s++;
 		printf("%d ",array[s]);
+		s++;
 	} // end while
 	printf("]\n");
 } // end printValues
 
-/*
-void sort(int values[]){
+void sort(int array[]){
 	int i = 0;
 	int j = 0;
-} // end sort
-*/
+	for(i = 0; (i < (MAX - 1)); i++){
+		for(j = 0; j < (MAX - 1);j++){
+				if(array[j] > array[j+1]){
+					swap(&array[j],&array[j+1]);
+					printValues(array);
+				} // end if
+		} // end j for
+	} // end i for
+}// end sort
 
 void swap(int* c, int* n){
 	int t = 0;
-	printf("Pre swap values: %d, %d, %d\n", t, *c, *n);
+	//printf("Pre swap values: %d, %d, %d\n", t, *c, *n);
 	t = *c; // t becomes the value at current
 	*c = *n; // value at next becomes value at current 
 	*n = t; // value at next becomes t (The old C)
-	printf("Post swap values: %d, %d, %d\n", t, *c, *n);
+	//printf("Post swap values: %d, %d, %d\n", t, *c, *n);
 }
 	
